@@ -23,7 +23,6 @@ jobs:
         make py
         make extra
         make test
-              - run:
     - name: Tests
       run: |
         (cd util && ./test)
