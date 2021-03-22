@@ -42,7 +42,7 @@ jobs:
       run: sh ./github/test.sh
   centosBuild:
     runs-on: ubuntu-latest
-    container: "centos:8"
+    container: "tgagor/centos-stream"
     steps:
     - uses: actions/checkout@v2
     - name: deps
@@ -50,7 +50,6 @@ jobs:
         yum -y install patch gcc make file pkg-config wget curl swig git
         yum -y install gsl-devel cairo-devel libpng-devel libjpeg-turbo-devel zlib-devel bzip2-devel swig python36-devel
         dnf -y install dnf-plugins-core
-        dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
         yum -y install epel-release
         dnf install -y 'dnf-command(config-manager)'
         dnf repolist
