@@ -15,7 +15,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: deps
       run: |
-        sudo apt-get install -y libcfitsio-dev
+        sudo apt-get install -y make gcc patch git openssh-client file pkg-config wget curl swig netpbm wcslib-dev wcslib-tools zlib1g-dev libbz2-dev libcairo2-dev libcfitsio-dev libcfitsio-bin libgsl-dev libjpeg-dev libnetpbm10-dev libpng-dev python3.9-dev libpython3.9-dev ca-certificates
         sudo pip3 install numpy fitsio
     - name: make
       run: |
