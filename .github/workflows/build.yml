@@ -16,4 +16,8 @@ jobs:
     - name: deps
       run: sudo apt-get install -y libcfitsio-dev
     - name: make
-      run: make
+      run: |
+        make
+        make py
+        make extra
+        make test
