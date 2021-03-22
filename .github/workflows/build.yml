@@ -9,7 +9,7 @@ on:
 jobs:
   ubuntuBuild1804:
     runs-on: ubuntu-latest
-    container: "ubuntun:18.04"
+    container: "ubuntu:18.04"
     steps:
     - uses: actions/checkout@v2
     - name: deps
