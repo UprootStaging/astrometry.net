@@ -17,28 +17,9 @@ jobs:
     - uses: actions/checkout@v2
     - name: deps
       run: |
-        sudo apt-get install -y make gcc patch git openssh-client file pkg-config wget curl swig netpbm wcslib-dev wcslib-tools zlib1g-dev libbz2-dev libcairo2-dev libcfitsio-dev libcfitsio-bin libgsl-dev libjpeg-dev libnetpbm10-dev libpng-dev python3.9-dev libpython3.9-dev ca-certificates
-        sudo pip3 install numpy fitsio
+        apt-get install -y make gcc patch git openssh-client file pkg-config wget curl swig netpbm wcslib-dev wcslib-tools zlib1g-dev libbz2-dev libcairo2-dev libcfitsio-dev libcfitsio-bin libgsl-dev libjpeg-dev libnetpbm10-dev libpng-dev python3.9-dev libpython3.9-dev ca-certificates
+        pip3 install numpy fitsio
     - name: make
-      run: |
-        make
-        make py
-        make extra
-        make test
+      run: sh ./github/make.sh
     - name: Tests
-      run: |
-        (cd util && ./test)
-        (cd libkd && ./test)
-        (cd solver && ./test)
-        (cd plot && ./test)
-        make install INSTALL_DIR=~/an
-        export PYTHONPATH=${PYTHONPATH}:~/an/lib/python
-        export PYTHON=python3
-        (cd /tmp && $PYTHON -c "import astrometry.libkd.spherematch")
-        export PATH=${PATH}:~/an/bin
-        build-astrometry-index -d 3 -o index-9918.fits -P 18 -S mag -B 0.1 -s 0 -r 1 -I 9918 -M -i demo/tycho2-mag6.fits
-        echo -e 'add_path .\ninparallel\nindex index-9918.fits' > 99.cfg
-        solve-field --config 99.cfg demo/apod4.jpg  --continue
-        tablist demo/apod4.match
-        listhead demo/apod4.wcs
-        (cd /tmp && $PYTHON -c "import astrometry.util.util; print(dir(astrometry.util.util))")
+      run: sh ./github/test.sh
