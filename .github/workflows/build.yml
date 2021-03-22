@@ -10,14 +10,39 @@ jobs:
   build:
     strategy:
       matrix:
-        os: ["centos:8", "ubuntu:18.04", "ubuntu:20.04"]
+        os: ["ubuntu:18.04", "ubuntu:20.04"]
     runs-on: ubuntu-latest
     container: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v2
     - name: deps
       run: |
+        apt-get update -y
         apt-get install -y make gcc patch git openssh-client file pkg-config wget curl swig netpbm wcslib-dev wcslib-tools zlib1g-dev libbz2-dev libcairo2-dev libcfitsio-dev libcfitsio-bin libgsl-dev libjpeg-dev libnetpbm10-dev libpng-dev python3.9-dev libpython3.9-dev ca-certificates
+        pip3 install numpy fitsio
+    - name: make
+      run: sh ./github/make.sh
+    - name: Tests
+      run: sh ./github/test.sh
+  build:
+    runs-on: ubuntu-latest
+    container: "centos:8"
+    steps:
+    - uses: actions/checkout@v2
+    - name: deps
+      run: |
+        yum -y install patch gcc make file pkg-config wget curl swig git
+        yum -y install gsl-devel cairo-devel libpng-devel libjpeg-turbo-devel zlib-devel bzip2-devel swig python36-devel
+        dnf -y install dnf-plugins-core
+        dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+        yum -y install epel-release
+        dnf install -y 'dnf-command(config-manager)'
+        dnf repolist
+        dnf config-manager --set-enabled powertools
+        dnf repolist
+        yum -y install netpbm netpbm-devel netpbm-progs
+        yum -y install cfitsio cfitsio-devel wcslib wcslib-utils wcslib-devel
+        ln -s /usr/lib64/libnetpbm.so.11 /usr/local/lib/libnetpbm.so
         pip3 install numpy fitsio
     - name: make
       run: sh ./github/make.sh
