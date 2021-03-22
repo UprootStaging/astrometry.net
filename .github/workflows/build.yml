@@ -24,9 +24,9 @@ jobs:
         sudo python3.7 -m pip install numpy fitsio
         apt-get remove -y python3.6
     - name: make
-      run: sh ./github/make.sh
+      run: sh .github/make.sh
     - name: Tests
-      run: sh ./github/test.sh
+      run: sh .github/test.sh
   ubuntuBuild2004:
     runs-on: ubuntu-latest
     container: "ubuntu:20.04"
@@ -40,9 +40,9 @@ jobs:
         apt-get install -y make gcc patch git openssh-client file pkg-config wget curl swig netpbm wcslib-dev wcslib-tools zlib1g-dev libbz2-dev libcairo2-dev libcfitsio-dev libcfitsio-bin libgsl-dev libjpeg-dev libnetpbm10-dev libpng-dev python3-pip python3-dev libpython3-dev ca-certificates
         sudo pip3 install numpy fitsio
     - name: make
-      run: sh ./github/make.sh
+      run: sh .github/make.sh
     - name: Tests
-      run: sh ./github/test.sh
+      run: sh .github/test.sh
   centosBuild:
     runs-on: ubuntu-latest
     container: "tgagor/centos-stream"
@@ -63,6 +63,6 @@ jobs:
         ln -s /usr/lib64/libnetpbm.so.11 /usr/local/lib/libnetpbm.so
         pip3 install numpy fitsio
     - name: make
-      run: sh ./github/make.sh
+      run: sh .github/make.sh
     - name: Tests
-      run: sh ./github/test.sh
+      run: sh .github/test.sh
