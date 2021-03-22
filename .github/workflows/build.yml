@@ -27,18 +27,15 @@ jobs:
       run: sh ./github/test.sh
   ubuntuBuild2004:
     runs-on: ubuntu-latest
-    container: "ubuntun:20.04"
     steps:
     - uses: actions/checkout@v2
     - name: deps
       run: |
-        export DEBIAN_FRONTEND=noninteractive
-        export TZ=Asia/Singapore
         apt-get update
         apt-get upgrade -y
         apt-get install -y sudo
         apt-get install -y make gcc patch git openssh-client file pkg-config wget curl swig netpbm wcslib-dev wcslib-tools zlib1g-dev libbz2-dev libcairo2-dev libcfitsio-dev libcfitsio-bin libgsl-dev libjpeg-dev libnetpbm10-dev libpng-dev python3-pip python3-dev libpython3-dev ca-certificates
-        sudo pip3 install numpy fitsio
+        pip3 install numpy fitsio
     - name: make
       run: sh ./github/make.sh
     - name: Tests
