@@ -2,7 +2,7 @@ name: compile
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, actiontest ]
   pull_request:
     branches: [ master ]
 
