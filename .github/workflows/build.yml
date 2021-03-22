@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  ubuntuBuild:
     strategy:
       matrix:
         os: ["ubuntu:18.04", "ubuntu:20.04"]
@@ -24,7 +24,7 @@ jobs:
       run: sh ./github/make.sh
     - name: Tests
       run: sh ./github/test.sh
-  build:
+  centosBuild:
     runs-on: ubuntu-latest
     container: "centos:8"
     steps:
