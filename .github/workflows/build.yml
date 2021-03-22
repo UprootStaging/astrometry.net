@@ -20,8 +20,9 @@ jobs:
         apt-get upgrade -y
         apt-get install -y sudo
         apt-get install -y make gcc patch git openssh-client file pkg-config wget curl swig netpbm wcslib-dev wcslib-tools zlib1g-dev libbz2-dev libcairo2-dev libcfitsio-dev libcfitsio-bin libgsl-dev libjpeg-dev libnetpbm10-dev libpng-dev python3-pip python3.7-dev libpython3.7-dev ca-certificates
+        sudo python3.7 -m pip install pip
+        sudo python3.7 -m pip install numpy fitsio
         apt-get remove -y python3.6
-        sudo pip3 install numpy fitsio
     - name: make
       run: sh ./github/make.sh
     - name: Tests
