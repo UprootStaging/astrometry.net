@@ -14,7 +14,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: deps
-      run: sudo apt-get install -y libcfitsio-dev
+      run: |
+        sudo apt-get install -y libcfitsio-dev
+        sudo pip3 install numpy fitsio
     - name: make
       run: |
         make
